@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
 import ThemeToggle from '../components/ThemeToggle'
+import { HIGH_SCORE_KEY, readStoredNumber } from '../utils/storage'
 
 function Home() {
+  const highScore = readStoredNumber(HIGH_SCORE_KEY)
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-slate-200 text-slate-900 transition dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 dark:text-slate-100">
       <section className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center px-6 py-10">
@@ -16,12 +19,12 @@ function Home() {
             </p>
 
             <h1 className="mb-5 text-4xl font-extrabold leading-tight md:text-5xl">
-              Pon a prueba tus conocimientos sobre países
+              Pon a prueba tus conocimientos sobre paises
             </h1>
 
             <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
               Responde preguntas sobre capitales, banderas y cultura general.
-              Tendrás 15 segundos por pregunta, así que piensa rápido.
+              Tendras 15 segundos por pregunta, asi que piensa rapido.
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -33,7 +36,7 @@ function Home() {
               </Link>
 
               <div className="rounded-2xl border border-slate-200 px-7 py-4 text-center font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-300">
-                High Score: 0
+                High Score: {highScore}
               </div>
             </div>
           </div>
@@ -44,10 +47,10 @@ function Home() {
             </p>
 
             <ul className="space-y-4 text-indigo-50">
-              <li>• 15 segundos por pregunta.</li>
-              <li>• Las respuestas correctas suman puntos.</li>
-              <li>• Si el tiempo termina, la pregunta cuenta como incorrecta.</li>
-              <li>• El mejor puntaje se guardará automáticamente.</li>
+              <li>- 15 segundos por pregunta.</li>
+              <li>- Las respuestas correctas suman puntos.</li>
+              <li>- Si el tiempo termina, la pregunta cuenta como incorrecta.</li>
+              <li>- El mejor puntaje se guarda automaticamente.</li>
             </ul>
           </div>
         </div>
