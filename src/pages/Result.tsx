@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom'
+import { useMemo } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import ThemeToggle from '../components/ThemeToggle'
+import { LAST_SCORE_KEY, readStoredNumber, saveScore } from '../utils/storage'
+
+type ResultRouteState = {
+  score?: number
+}
 
 function Result() {
+  const location = useLocation()
+  const state = location.state as ResultRouteState | null
+  const score = state?.score ?? readStoredNumber(LAST_SCORE_KEY)
+  const highScore = useMemo(() => saveScore(score), [score])
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-slate-200 text-slate-900 transition dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 dark:text-slate-100">
       <section className="relative mx-auto flex min-h-screen max-w-5xl items-center justify-center px-6 py-10">
@@ -19,8 +30,7 @@ function Result() {
           </h1>
 
           <p className="mx-auto mb-8 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-            Aquí se mostrará el puntaje obtenido, el mejor puntaje guardado y la
-            opción para volver a intentarlo.
+            Tu puntaje queda guardado junto al mejor resultado alcanzado.
           </p>
 
           <div className="mx-auto mb-8 grid max-w-md gap-4 sm:grid-cols-2">
@@ -29,7 +39,7 @@ function Result() {
                 Puntaje
               </p>
               <p className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-300">
-                0
+                {score}
               </p>
             </div>
 
@@ -38,7 +48,7 @@ function Result() {
                 High Score
               </p>
               <p className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-300">
-                0
+                {highScore}
               </p>
             </div>
           </div>
